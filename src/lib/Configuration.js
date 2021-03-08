@@ -21,6 +21,7 @@ export default class Configuration {
       cookieVersion: 1,
       modalMainTextMoreLink: null,
       barTimeout: 1000,
+      barMainTextAllowHtml: false,
       theme: {
         barColor: '#2C7CBF',
         barTextColor: '#FFF',
@@ -70,7 +71,9 @@ export default class Configuration {
 
   setConfiguration(configObject) {
     // The user overrides the default config
-    console.log(window.CookieConsent.config, configObject, { ...window.CookieConsent.config, ...configObject });
+    if (process.env.NODE_ENV === 'development') {
+      console.log(window.CookieConsent.config, configObject, { ...window.CookieConsent.config, ...configObject });
+    }
 
     this.mergeDeep(window.CookieConsent.config, configObject)
     //loMerge(window.CookieConsent.config, configObject);

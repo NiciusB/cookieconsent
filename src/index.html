@@ -9,8 +9,14 @@
   <script src="./index.js"></script>
   <script>
   window.CookieConsent.init({
+    barMainTextAllowHtml: true,
     language: {
-      current: 'en'
+      current: 'en',
+      locale: {
+        en: {
+          barMainText: 'This website uses cookies to ensure you get the best experience on our website. <b>Test html</b>',
+        }
+      }
     },
     categories: {
       necessary: {

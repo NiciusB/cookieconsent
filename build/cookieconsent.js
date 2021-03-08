@@ -2651,7 +2651,10 @@ function () {
   }, {
     key: "buildBar",
     value: function buildBar() {
-      return (0, _redom.el)('div#cconsent-bar.ccb--hidden', (0, _redom.el)("div.ccb__wrapper", (0, _redom.el)('div.ccb__left', (0, _redom.el)('div.cc-text', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barMainText'))), (0, _redom.el)('div.ccb__right', (0, _redom.el)('div.ccb__button', (0, _redom.el)('a.ccb__edit', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barLinkSetting')), (0, _redom.el)('button.consent-give', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barBtnAcceptAll'))))));
+      var barTextDiv = window.CookieConsent.config.barMainTextAllowHtml ? (0, _redom.el)("div.cc-text", "", {
+        innerHTML: _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, "barMainText")
+      }) : (0, _redom.el)("div.cc-text", _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, "barMainText"));
+      return (0, _redom.el)('div#cconsent-bar.ccb--hidden', (0, _redom.el)("div.ccb__wrapper", (0, _redom.el)('div.ccb__left', barTextDiv), (0, _redom.el)('div.ccb__right', (0, _redom.el)('div.ccb__button', (0, _redom.el)('a.ccb__edit', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barLinkSetting')), (0, _redom.el)('button.consent-give', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barBtnAcceptAll'))))));
     }
   }, {
     key: "buildModal",
@@ -2709,7 +2712,7 @@ function () {
         href: window.CookieConsent.config.modalMainTextMoreLink,
         target: '_blank',
         rel: 'noopener noreferrer'
-      }, _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'learnMore')) : null), (0, _redom.el)('div.ccm__cheading__close', '×')), (0, _redom.el)('div.ccm__content__body', (0, _redom.el)('div.ccm__tabs', modalTabGroups())), (0, _redom.el)('div.ccm__footer', (0, _redom.el)('button#ccm__footer__consent-modal-submit', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnSave')), (0, _redom.el)('button.consent-give', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnAcceptAll')))));
+      }, ' ' + _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'learnMore')) : null), (0, _redom.el)('div.ccm__cheading__close', '×')), (0, _redom.el)('div.ccm__content__body', (0, _redom.el)('div.ccm__tabs', modalTabGroups())), (0, _redom.el)('div.ccm__footer', (0, _redom.el)('button#ccm__footer__consent-modal-submit', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnSave')), (0, _redom.el)('button.consent-give', _Language.default.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalBtnAcceptAll')))));
     }
   }, {
     key: "modalRedrawIcons",
@@ -3040,6 +3043,7 @@ function () {
       cookieVersion: 1,
       modalMainTextMoreLink: null,
       barTimeout: 1000,
+      barMainTextAllowHtml: false,
       theme: {
         barColor: '#2C7CBF',
         barTextColor: '#FFF',
@@ -3089,7 +3093,10 @@ function () {
     key: "setConfiguration",
     value: function setConfiguration(configObject) {
       // The user overrides the default config
-      console.log(window.CookieConsent.config, configObject, _objectSpread({}, window.CookieConsent.config, configObject));
+      if ("production" === 'development') {
+        console.log(window.CookieConsent.config, configObject, _objectSpread({}, window.CookieConsent.config, configObject));
+      }
+
       this.mergeDeep(window.CookieConsent.config, configObject); //loMerge(window.CookieConsent.config, configObject);
       // The cookie overrides the default and user config
 

@@ -72,10 +72,27 @@ export default class Interface {
   }
 
   buildBar() {
+    var barTextDiv = window.CookieConsent.config.barMainTextAllowHtml
+      ? el("div.cc-text", "", {
+          innerHTML: Language.getTranslation(
+            window.CookieConsent.config,
+            window.CookieConsent.config.language.current,
+            "barMainText"
+          ),
+        })
+      : el(
+          "div.cc-text",
+          Language.getTranslation(
+            window.CookieConsent.config,
+            window.CookieConsent.config.language.current,
+            "barMainText"
+          )
+        );
+
     return el('div#cconsent-bar.ccb--hidden',
         el(`div.ccb__wrapper`,
           el('div.ccb__left',
-            el('div.cc-text', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'barMainText'))
+          barTextDiv
           ),
           el('div.ccb__right',
             el('div.ccb__button',
@@ -158,7 +175,7 @@ export default class Interface {
           el('h2', Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainTitle')),
           el('p',
             Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'modalMainText'),
-            (window.CookieConsent.config.modalMainTextMoreLink) ? el('a', { href: window.CookieConsent.config.modalMainTextMoreLink, target: '_blank', rel: 'noopener noreferrer' }, Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'learnMore')) : null
+            (window.CookieConsent.config.modalMainTextMoreLink) ? el('a', { href: window.CookieConsent.config.modalMainTextMoreLink, target: '_blank', rel: 'noopener noreferrer' }, ' ' + Language.getTranslation(window.CookieConsent.config, window.CookieConsent.config.language.current, 'learnMore')) : null
           ),
           el('div.ccm__cheading__close', '×')
         ),

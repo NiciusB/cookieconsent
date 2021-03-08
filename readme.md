@@ -58,6 +58,8 @@ The script is being controlled mainly by a configuration object which is passed 
     modalMainTextMoreLink: null,
     // How lond to wait until bar comes up
     barTimeout: 1000,
+    // Whether to allow html in the bar main text, or escape it.
+    barMainTextAllowHtml: false,
     // Look and feel
     theme: {
       barColor: '#2C7CBF',
